@@ -114,3 +114,7 @@ export { reload } from './core/user/reload';
 export async function deleteUser(user: externs.User): Promise<void> {
   return user.delete();
 }
+
+export { BrowserPopupRedirectResolver } from './platform_browser/popup_redirect';
+export { signInWithPopup } from './core/strategies/popup';
+export { OAuthProvider } from './core/providers/oauth';

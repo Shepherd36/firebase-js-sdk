@@ -45,8 +45,13 @@ import {
   confirmPasswordReset,
   linkWithCredential,
   reauthenticateWithCredential,
-  unlink
+  unlink,
+  OAuthProvider,
+  signInWithPopup,
+  BrowserPopupRedirectResolver
 } from '@firebase/auth-exp';
+
+const browserPopupRedirectResolver = new BrowserPopupRedirectResolver();
 
 import { config } from './config';
 import {
@@ -1173,10 +1178,10 @@ function onPopupRedirectAddCustomParam(event) {
  * Performs the corresponding popup/redirect action for a generic provider.
  */
 function onPopupRedirectGenericProviderClick() {
-  alertNotImplemented();
-  // var providerId = $('#popup-redirect-generic-providerid').val();
-  // var provider = new firebase.auth.OAuthProvider(providerId);
-  // signInWithPopupRedirect(provider);
+  // alertNotImplemented();
+  var providerId = $('#popup-redirect-generic-providerid').val();
+  var provider = new OAuthProvider(providerId);
+  signInWithPopupRedirect(provider);
 }
 
 /**
@@ -1223,6 +1228,9 @@ function onPopupRedirectProviderClick(event) {
  *     sign in.
  */
 function signInWithPopupRedirect(provider) {
+  var glob = {
+    signInWithPopup,
+  }
   var action = $('input[name=popup-redirect-action]:checked').val();
   var type = $('input[name=popup-redirect-type]:checked').val();
   var method = null;
@@ -1278,7 +1286,7 @@ function signInWithPopupRedirect(provider) {
   console.log('Provider:');
   console.log(provider);
   if (type == 'popup') {
-    inst[method](provider).then(function(response) {
+    glob[method](inst, provider, browserPopupRedirectResolver).then(function(response) {
       console.log('Popup response:');
       console.log(response);
       alertSuccess(action + ' with ' + provider['providerId'] + ' successful!');
@@ -1286,12 +1294,13 @@ function signInWithPopupRedirect(provider) {
       onAuthSuccess(activeUser());
     }, onAuthError);
   } else {
-    try {
-      inst[method](provider).catch(onAuthError);
-    } catch (error) {
-      console.log('Error while calling ' + method);
-      console.error(error);
-    }
+    alertNotImplemented();
+    // try {
+    //   inst[method](provider).catch(onAuthError);
+    // } catch (error) {
+    //   console.log('Error while calling ' + method);
+    //   console.error(error);
+    // }
   }
 }
 
