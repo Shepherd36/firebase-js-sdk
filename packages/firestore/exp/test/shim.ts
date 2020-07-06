@@ -71,6 +71,8 @@ export { GeoPoint, Blob, Timestamp } from '../../exp/index.node';
 export class FirebaseFirestore implements legacy.FirebaseFirestore {
   constructor(private readonly _delegate: exp.FirebaseFirestore) {}
 
+  app = this._delegate.app;
+
   settings(settings: legacy.Settings): void {
     initializeFirestore(this.app, settings);
   }
@@ -104,8 +106,6 @@ export class FirebaseFirestore implements legacy.FirebaseFirestore {
   batch(): legacy.WriteBatch {
     return new WriteBatch(writeBatch(this._delegate));
   }
-
-  app = this._delegate.app;
 
   clearPersistence(): Promise<void> {
     return clearIndexedDbPersistence(this._delegate);
