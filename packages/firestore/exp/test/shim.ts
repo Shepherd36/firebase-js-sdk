@@ -648,7 +648,7 @@ export class CollectionReference<T = legacy.DocumentData> extends Query<T>
     }
   }
 
-  async add(data: T): Promise<DocumentReference<T>> {
+  add(data: T): Promise<DocumentReference<T>> {
     return addDoc(this._delegate, unwwrap(data)).then(
       docRef => new DocumentReference(docRef)
     );
