@@ -60,7 +60,7 @@ import { UntypedFirestoreDataConverter } from '../../src/api/user_data_reader';
 import { isPartialObserver, PartialObserver } from '../../src/api/observer';
 import { isPlainObject } from '../../src/util/input_validation';
 
-export { GeoPoint, Blob, Timestamp } from '../../exp/index.node';
+export { GeoPoint, Blob, Timestamp } from '../index.node';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
