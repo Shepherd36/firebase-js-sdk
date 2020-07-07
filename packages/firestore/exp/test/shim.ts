@@ -16,7 +16,7 @@
  */
 
 import * as legacy from '@firebase/firestore-types';
-import * as exp from '../../exp/';
+import * as exp from '../';
 
 import {
   addDoc,
