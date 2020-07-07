@@ -61,6 +61,7 @@ export { indexedDBLocalPersistence } from './core/persistence/indexed_db';
 
 // core/providers
 export { EmailAuthProvider } from './core/providers/email';
+export { OAuthProvider } from './core/providers/oauth';
 export { PhoneAuthProvider } from './core/providers/phone';
 
 // core/strategies
@@ -94,6 +95,11 @@ export {
   linkWithPhoneNumber,
   reauthenticateWithPhoneNumber
 } from './core/strategies/phone';
+export {
+  signInWithPopup,
+  linkWithPopup,
+  reauthenticateWithPopup
+} from './core/strategies/popup';
 
 // core
 export { ActionCodeURL, parseActionCodeURL } from './core/action_code_url';
@@ -115,6 +121,5 @@ export async function deleteUser(user: externs.User): Promise<void> {
   return user.delete();
 }
 
+// TODO(samhorlbeck): This should be exported as a single const
 export { BrowserPopupRedirectResolver } from './platform_browser/popup_redirect';
-export { signInWithPopup } from './core/strategies/popup';
-export { OAuthProvider } from './core/providers/oauth';
